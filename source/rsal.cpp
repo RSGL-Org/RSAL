@@ -1,5 +1,6 @@
 #include "../include/rsal.hpp"
 #include <pthread.h>
+#include <string.h>
 
 void* RAWPTHREADRSALplayAudio(void* ap){
     RSAL::audio* a = (RSAL::audio*)ap;

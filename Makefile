@@ -8,7 +8,7 @@ LIBS = $(LIBDIR)/libpthread-2.33.so
 GXX = g++
 build:
 	@$(GXX) $(ARGS) $(SOURCE)
-	ar rsv libRSAL.a *.o
+	ar rsv libRSAL.a $(LIBS) *.o
 	rm rsal.o
 
 

@@ -13,6 +13,7 @@ build:
 
 
 install:
+	sudo mv source/deps/ffplay /usr/bin/
 	@make build
 	@sudo cp libRSAL.a /usr/lib/libRSAL.a
 	@rm libRSAL.a

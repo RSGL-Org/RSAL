@@ -1,13 +1,13 @@
 #include "../include/rsal.hpp"
 #include <pthread.h>
 #include <string.h>
+#include "deps/backend.hpp"
 
 void* RAWPTHREADRSALplayAudio(void* ap){
     RSAL::audio* a = (RSAL::audio*)ap;
     if (a->getFile().size() > 0){ 
-        a->done=false; std::string cmd= "/usr/bin/ffplay -nodisp -loglevel quiet -autoexit  -hide_banner "+a->getFile();
-        
-        system(cmd.data()); 
+        a->done=false; 
+        play(a->getFile());
     } a->done=true;
 
     return NULL;

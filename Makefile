@@ -1,28 +1,29 @@
-ARGS = -c
-OS = linux
-SOURCEDIR = source
-SOURCE = $(SOURCEDIR)/rsal.cpp
-LIBDIR = $(SOURCEDIR)/deps
-LIBS = $(LIBDIR)/libpthread-2.33.so
+ARGS = -Wall -fPIC -O -g
+SOURCE  = source/*.cpp
+LIBS =  source/deps/*.so source/deps/*.34 source/deps/*.0 source/deps/*.7
 
 GXX = g++
 build:
-	@$(GXX) $(ARGS) $(SOURCE)
-	ar rsv libRSAL.a $(LIBS) *.o
-	rm rsal.o
-
+	@$(GXX) -c $(ARGS) $(SOURCE) -c --no-warnings
+	@$(GXX) -shared *.o  $(LIBS) -o libRSAL.so 
+	@rm *.o;
 
 install:
-	sudo mv source/deps/ffplay /usr/bin/
 	@make build
-	@sudo cp libRSAL.a /usr/lib/libRSAL.a
-	@rm libRSAL.a
+	@sudo cp libRSAL.so /usr/lib/libRSAL.so
+	@rm libRSAL.so
 	@mkdir ./RSAL
-	@cp -r include RSAL.hpp ./RSAL
+	@cp -r include RSGL.hpp ./Examples ./RSGL
 	@sudo cp -r ./RSAL /usr/include/
-	@rm -r ./RSAL
-
+	@sudo rm -r ./RSAL
 
 all:
-	make build
-	sudo make install
+	build
+	install
+
+uninstall:
+	rm /usr/lib/libRSAL.so
+
+update:
+	rm /usr/lib/libRSAL.so
+	@make install
